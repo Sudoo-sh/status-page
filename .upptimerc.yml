@@ -15,7 +15,7 @@ sites:
     url: https://hub.sudoo.sh/healthz
     expectedStatusCodes: [200]
     maxRedirects: 0
-    icon: https://status.sudoo.sh/sudoo-icon.svg
+    icon: https://sudoo.sh/favicon.svg
 
   # /health is the one path of the sign-in site that never touches a sign-in flow.
   - name: Sign-in
@@ -23,7 +23,7 @@ sites:
     url: https://auth.sudoo.sh/health
     expectedStatusCodes: [200]
     maxRedirects: 0
-    icon: https://status.sudoo.sh/sudoo-icon.svg
+    icon: https://sudoo.sh/favicon.svg
 
   # Signed-out visitors are redirected to the sign-in site; the redirect itself
   # is the healthy answer, so it is not followed.
@@ -32,49 +32,49 @@ sites:
     url: https://app.sudoo.sh/
     expectedStatusCodes: [200, 201, 202, 203, 204, 301, 302, 303, 307, 308]
     maxRedirects: 0
-    icon: https://status.sudoo.sh/sudoo-icon.svg
+    icon: https://sudoo.sh/favicon.svg
 
   - name: Admin
     slug: admin
     url: https://admin.sudoo.sh/health
     expectedStatusCodes: [200]
     maxRedirects: 0
-    icon: https://status.sudoo.sh/sudoo-icon.svg
+    icon: https://sudoo.sh/favicon.svg
 
   - name: Developers
     slug: developers
     url: https://developers.sudoo.sh/
     expectedStatusCodes: [200]
     maxRedirects: 0
-    icon: https://status.sudoo.sh/sudoo-icon.svg
+    icon: https://sudoo.sh/favicon.svg
 
   - name: Marketplace
     slug: marketplace
     url: https://marketplace.sudoo.sh/
     expectedStatusCodes: [200]
     maxRedirects: 0
-    icon: https://status.sudoo.sh/sudoo-icon.svg
+    icon: https://sudoo.sh/favicon.svg
 
   - name: Files
     slug: files
     url: https://files.sudoo.sh/healthz
     expectedStatusCodes: [200]
     maxRedirects: 0
-    icon: https://status.sudoo.sh/sudoo-icon.svg
+    icon: https://sudoo.sh/favicon.svg
 
   - name: Website
     slug: website
     url: https://sudoo.sh/
     expectedStatusCodes: [200]
     maxRedirects: 0
-    icon: https://status.sudoo.sh/sudoo-icon.svg
+    icon: https://sudoo.sh/favicon.svg
 
   - name: Docs
     slug: docs
     url: https://docs.sudoo.sh/
     expectedStatusCodes: [200]
     maxRedirects: 0
-    icon: https://status.sudoo.sh/sudoo-icon.svg
+    icon: https://sudoo.sh/favicon.svg
 
   # get.sudoo.sh only redirects (302) to the installer script of the latest release.
   - name: Installer
@@ -82,7 +82,7 @@ sites:
     url: https://get.sudoo.sh/
     expectedStatusCodes: [302]
     maxRedirects: 0
-    icon: https://status.sudoo.sh/sudoo-icon.svg
+    icon: https://sudoo.sh/favicon.svg
 
 status-website:
   cname: status.sudoo.sh
