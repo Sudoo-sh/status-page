@@ -91,7 +91,7 @@ status-website:
   faviconSvg: https://status.sudoo.sh/sudoo-icon.svg
   favicon: https://sudoo.sh/icon-192.png
   # Plum (#714b67) theme with light and dark variants (assets/sudoo-theme.css).
-  themeUrl: /sudoo-theme.css
+  customHeadHtml: <link rel="stylesheet" href="/themes/sudoo.css">
   introTitle: "Sudoo.sh status"
   introMessage: "Live status of Sudoo.sh services."
   navbar:
