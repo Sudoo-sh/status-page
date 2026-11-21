@@ -1,31 +1,111 @@
-# Change these first
-owner: upptime # Your GitHub organization or username, where this repository lives
-repo: upptime # The name of this repository
+# Upptime configuration for status.sudoo.sh.
+# Docs: https://upptime.js.org/docs/configuration
+#
+# Checks use the same health paths as the platform's own monitor, so no check
+# goes through a sign-in page or a Cloudflare challenge. Redirects are not
+# followed (maxRedirects: 0): the first response is what is checked.
+owner: Sudoo-sh
+repo: status-page
+
+skipDescriptionUpdate: true
 
 sites:
-  - name: Google
-    url: https://www.google.com
-  - name: Wikipedia
-    url: https://en.wikipedia.org
-  - name: Hacker News
-    url: https://news.ycombinator.com
-  - name: Secret Site
-    url: $SECRET_SITE
+  - name: Hub API
+    slug: hub-api
+    url: https://hub.sudoo.sh/healthz
+    expectedStatusCodes: [200]
+    maxRedirects: 0
+    icon: https://status.sudoo.sh/sudoo-icon.svg
+
+  # /health is the one path of the sign-in site that never touches a sign-in flow.
+  - name: Sign-in
+    slug: sign-in
+    url: https://auth.sudoo.sh/health
+    expectedStatusCodes: [200]
+    maxRedirects: 0
+    icon: https://status.sudoo.sh/sudoo-icon.svg
+
+  # Signed-out visitors are redirected to the sign-in site; the redirect itself
+  # is the healthy answer, so it is not followed.
+  - name: Account
+    slug: account
+    url: https://app.sudoo.sh/
+    expectedStatusCodes: [200, 201, 202, 203, 204, 301, 302, 303, 307, 308]
+    maxRedirects: 0
+    icon: https://status.sudoo.sh/sudoo-icon.svg
+
+  - name: Admin
+    slug: admin
+    url: https://admin.sudoo.sh/health
+    expectedStatusCodes: [200]
+    maxRedirects: 0
+    icon: https://status.sudoo.sh/sudoo-icon.svg
+
+  - name: Developers
+    slug: developers
+    url: https://developers.sudoo.sh/
+    expectedStatusCodes: [200]
+    maxRedirects: 0
+    icon: https://status.sudoo.sh/sudoo-icon.svg
+
+  - name: Marketplace
+    slug: marketplace
+    url: https://marketplace.sudoo.sh/
+    expectedStatusCodes: [200]
+    maxRedirects: 0
+    icon: https://status.sudoo.sh/sudoo-icon.svg
+
+  - name: Files
+    slug: files
+    url: https://files.sudoo.sh/healthz
+    expectedStatusCodes: [200]
+    maxRedirects: 0
+    icon: https://status.sudoo.sh/sudoo-icon.svg
+
+  - name: Website
+    slug: website
+    url: https://sudoo.sh/
+    expectedStatusCodes: [200]
+    maxRedirects: 0
+    icon: https://status.sudoo.sh/sudoo-icon.svg
+
+  - name: Docs
+    slug: docs
+    url: https://docs.sudoo.sh/
+    expectedStatusCodes: [200]
+    maxRedirects: 0
+    icon: https://status.sudoo.sh/sudoo-icon.svg
+
+  # get.sudoo.sh only redirects (302) to the installer script of the latest release.
+  - name: Installer
+    slug: installer
+    url: https://get.sudoo.sh/
+    expectedStatusCodes: [302]
+    maxRedirects: 0
+    icon: https://status.sudoo.sh/sudoo-icon.svg
 
 status-website:
-  # Add your custom domain name, or remove the `cname` line if you don't have a domain
-  # Uncomment the `baseUrl` line if you don't have a custom domain and add your repo name there
-  cname: demo.upptime.js.org
-  # baseUrl: /your-repo-name
-  logoUrl: https://raw.githubusercontent.com/upptime/upptime.js.org/master/static/img/icon.svg
-  name: Upptime
-  introTitle: "**Upptime** is the open-source uptime monitor and status page, powered entirely by GitHub."
-  introMessage: This is a sample status page which uses **real-time** data from our [GitHub repository](https://github.com/upptime/upptime). No server required — just GitHub Actions, Issues, and Pages. [**Get your own for free**](https://github.com/upptime/upptime)
+  cname: status.sudoo.sh
+  name: Sudoo.sh status
+  logoUrl: https://status.sudoo.sh/sudoo-mark.svg
+  faviconSvg: https://status.sudoo.sh/sudoo-icon.svg
+  favicon: https://sudoo.sh/icon-192.png
+  # Plum (#714b67) theme with light and dark variants (assets/sudoo-theme.css).
+  themeUrl: /sudoo-theme.css
+  introTitle: "Sudoo.sh status"
+  introMessage: "Live status of Sudoo.sh services."
   navbar:
     - title: Status
       href: /
-    - title: GitHub
-      href: https://github.com/$OWNER/$REPO
+    - title: Website
+      href: https://sudoo.sh
+    - title: Support
+      href: mailto:support@sudoo.sh
+  metaTags:
+    - name: color-scheme
+      content: "light dark"
+    - name: theme-color
+      content: "#714b67"
 
-# Upptime also supports notifications, assigning issues, and more
-# See https://upptime.js.org/docs/configuration
+i18n:
+  footer: "© Sudoo.sh · [sudoo.sh](https://sudoo.sh) · [support@sudoo.sh](mailto:support@sudoo.sh) · Powered by [Upptime](https://upptime.js.org)"

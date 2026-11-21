@@ -1,0 +1,68 @@
+/* Sudoo.sh theme for the Upptime status page: plum #714b67, light and dark. */
+:root {
+  color-scheme: light dark;
+  --body-background-color: #fafafa;
+  --body-text-color: #171717;
+  --card-background-color: #ffffff;
+  --nav-background-color: #ffffff;
+  --nav-border-bottom-color: #e4e4e7;
+  --nav-current-border-bottom-color: #714b67;
+  --card-border-color: #e4e4e7;
+  --down-border-left-color: #dc2626;
+  --down-background-color: #fde2e2;
+  --degraded-border-left-color: #d97706;
+  --up-border-left-color: #16a34a;
+  --tag-color: #ffffff;
+  --tag-up-background-color: #16a34a;
+  --tag-down-background-color: #dc2626;
+  --tag-degraded-background-color: #d97706;
+  --change-background-color: #d97706;
+  --error-button-border-color: #5f3d56;
+  --error-button-background-color: #714b67;
+  --error-button-color: #ffffff;
+  --submit-button-border-color: #5f3d56;
+  --submit-button-background-color: #714b67;
+  --submit-button-color: #ffffff;
+  --graph-opacity: 1;
+  --graph-filter: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --body-background-color: #141415;
+    --body-text-color: #ededed;
+    --card-background-color: #19191b;
+    --nav-background-color: #19191b;
+    --nav-border-bottom-color: #2a2a2c;
+    --nav-current-border-bottom-color: #c79bbd;
+    --card-border-color: #2a2a2c;
+    --down-border-left-color: #e5484d;
+    --down-background-color: #3b1517;
+    --degraded-border-left-color: #f5a524;
+    --up-border-left-color: #4cc38a;
+    --tag-color: #141415;
+    --tag-up-background-color: #4cc38a;
+    --tag-down-background-color: #e5484d;
+    --tag-degraded-background-color: #f5a524;
+    --change-background-color: #f5a524;
+    --error-button-border-color: #d9b6d0;
+    --error-button-background-color: #c79bbd;
+    --error-button-color: #1b1219;
+    --submit-button-border-color: #d9b6d0;
+    --submit-button-background-color: #c79bbd;
+    --submit-button-color: #1b1219;
+    --graph-opacity: 0.9;
+    --graph-filter: none;
+  }
+}
+
+html, body, button, input, select {
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+a:focus-visible, button:focus-visible {
+  outline: 3px solid rgb(113 75 103 / 0.35);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
