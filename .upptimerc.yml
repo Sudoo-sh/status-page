@@ -15,7 +15,7 @@ sites:
     url: https://hub.sudoo.sh/healthz
     expectedStatusCodes: [200]
     maxRedirects: 0
-    icon: https://sudoo.sh/favicon.svg
+    icon: https://status.sudoo.sh/favicon.svg
 
   # /health is the one path of the sign-in site that never touches a sign-in flow.
   - name: Sign-in
@@ -23,7 +23,7 @@ sites:
     url: https://auth.sudoo.sh/health
     expectedStatusCodes: [200]
     maxRedirects: 0
-    icon: https://sudoo.sh/favicon.svg
+    icon: https://status.sudoo.sh/favicon.svg
 
   # Signed-out visitors are redirected to the sign-in site; the redirect itself
   # is the healthy answer, so it is not followed.
@@ -32,49 +32,49 @@ sites:
     url: https://app.sudoo.sh/
     expectedStatusCodes: [200, 201, 202, 203, 204, 301, 302, 303, 307, 308]
     maxRedirects: 0
-    icon: https://sudoo.sh/favicon.svg
+    icon: https://status.sudoo.sh/favicon.svg
 
   - name: Admin
     slug: admin
     url: https://admin.sudoo.sh/health
     expectedStatusCodes: [200]
     maxRedirects: 0
-    icon: https://sudoo.sh/favicon.svg
+    icon: https://status.sudoo.sh/favicon.svg
 
   - name: Developers
     slug: developers
     url: https://developers.sudoo.sh/
     expectedStatusCodes: [200]
     maxRedirects: 0
-    icon: https://sudoo.sh/favicon.svg
+    icon: https://status.sudoo.sh/favicon.svg
 
   - name: Marketplace
     slug: marketplace
     url: https://marketplace.sudoo.sh/
     expectedStatusCodes: [200]
     maxRedirects: 0
-    icon: https://sudoo.sh/favicon.svg
+    icon: https://status.sudoo.sh/favicon.svg
 
   - name: Files
     slug: files
     url: https://files.sudoo.sh/healthz
     expectedStatusCodes: [200]
     maxRedirects: 0
-    icon: https://sudoo.sh/favicon.svg
+    icon: https://status.sudoo.sh/favicon.svg
 
   - name: Website
     slug: website
     url: https://sudoo.sh/
     expectedStatusCodes: [200]
     maxRedirects: 0
-    icon: https://sudoo.sh/favicon.svg
+    icon: https://status.sudoo.sh/favicon.svg
 
   - name: Docs
     slug: docs
     url: https://docs.sudoo.sh/
     expectedStatusCodes: [200]
     maxRedirects: 0
-    icon: https://sudoo.sh/favicon.svg
+    icon: https://status.sudoo.sh/favicon.svg
 
   # get.sudoo.sh only redirects (302) to the installer script of the latest release.
   - name: Installer
@@ -82,16 +82,22 @@ sites:
     url: https://get.sudoo.sh/
     expectedStatusCodes: [302]
     maxRedirects: 0
-    icon: https://sudoo.sh/favicon.svg
+    icon: https://status.sudoo.sh/favicon.svg
 
+# The mark is served from this site (assets/favicon.svg, copied into the build): sudoo.sh sends
+# Cross-Origin-Resource-Policy: same-origin, so browsers refuse its copy on status.sudoo.sh.
 status-website:
   cname: status.sudoo.sh
   name: Sudoo.sh status
-  logoUrl: https://sudoo.sh/favicon.svg
-  faviconSvg: https://sudoo.sh/favicon.svg
-  favicon: https://sudoo.sh/favicon.svg
-  # Plum (#714b67) theme with light and dark variants (assets/sudoo-theme.css).
-  customHeadHtml: '<style>:root { color-scheme: light dark; --body-background-color: #fafafa; --body-text-color: #171717; --card-background-color: #ffffff; --nav-background-color: #ffffff; --nav-border-bottom-color: #e4e4e7; --nav-current-border-bottom-color: #714b67; --card-border-color: #e4e4e7; --down-border-left-color: #dc2626; --down-background-color: #fde2e2; --degraded-border-left-color: #d97706; --up-border-left-color: #16a34a; --tag-color: #ffffff; --tag-up-background-color: #16a34a; --tag-down-background-color: #dc2626; --tag-degraded-background-color: #d97706; --change-background-color: #d97706; --error-button-border-color: #5f3d56; --error-button-background-color: #714b67; --error-button-color: #ffffff; --submit-button-border-color: #5f3d56; --submit-button-background-color: #714b67; --submit-button-color: #ffffff; --graph-opacity: 1; --graph-filter: none; } @media (prefers-color-scheme: dark) { :root { --body-background-color: #141415; --body-text-color: #ededed; --card-background-color: #19191b; --nav-background-color: #19191b; --nav-border-bottom-color: #2a2a2c; --nav-current-border-bottom-color: #c79bbd; --card-border-color: #2a2a2c; --down-border-left-color: #e5484d; --down-background-color: #3b1517; --degraded-border-left-color: #f5a524; --up-border-left-color: #4cc38a; --tag-color: #141415; --tag-up-background-color: #4cc38a; --tag-down-background-color: #e5484d; --tag-degraded-background-color: #f5a524; --change-background-color: #f5a524; --error-button-border-color: #d9b6d0; --error-button-background-color: #c79bbd; --error-button-color: #1b1219; --submit-button-border-color: #d9b6d0; --submit-button-background-color: #c79bbd; --submit-button-color: #1b1219; --graph-opacity: 0.9; --graph-filter: none; } } html, body, button, input, select { font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif; -webkit-font-smoothing: antialiased; } a { color: inherit; } a:focus-visible, button:focus-visible { outline: 3px solid rgb(113 75 103 / 0.35); outline-offset: 2px; border-radius: 8px; }</style>'
+  logoUrl: https://status.sudoo.sh/favicon.svg
+  faviconSvg: https://status.sudoo.sh/favicon.svg
+  favicon: https://status.sudoo.sh/favicon.svg
+  # Plum (#714b67) theme with light and dark variants. After the theme, rules that keep the page from jumping
+  # while the status is fetched from GitHub: the incident and maintenance spinners are hidden (those lists are
+  # usually empty), room is kept for the summary line above them, the live status keeps the rest of the screen
+  # until its cards arrive, and the icons have their size before they load. Then the two origins the page
+  # fetches from are connected to early.
+  customHeadHtml: '<style>:root { color-scheme: light dark; --body-background-color: #fafafa; --body-text-color: #171717; --card-background-color: #ffffff; --nav-background-color: #ffffff; --nav-border-bottom-color: #e4e4e7; --nav-current-border-bottom-color: #714b67; --card-border-color: #e4e4e7; --down-border-left-color: #dc2626; --down-background-color: #fde2e2; --degraded-border-left-color: #d97706; --up-border-left-color: #16a34a; --tag-color: #ffffff; --tag-up-background-color: #16a34a; --tag-down-background-color: #dc2626; --tag-degraded-background-color: #d97706; --change-background-color: #d97706; --error-button-border-color: #5f3d56; --error-button-background-color: #714b67; --error-button-color: #ffffff; --submit-button-border-color: #5f3d56; --submit-button-background-color: #714b67; --submit-button-color: #ffffff; --graph-opacity: 1; --graph-filter: none; } @media (prefers-color-scheme: dark) { :root { --body-background-color: #141415; --body-text-color: #ededed; --card-background-color: #19191b; --nav-background-color: #19191b; --nav-border-bottom-color: #2a2a2c; --nav-current-border-bottom-color: #c79bbd; --card-border-color: #2a2a2c; --down-border-left-color: #e5484d; --down-background-color: #3b1517; --degraded-border-left-color: #f5a524; --up-border-left-color: #4cc38a; --tag-color: #141415; --tag-up-background-color: #4cc38a; --tag-down-background-color: #e5484d; --tag-degraded-background-color: #f5a524; --change-background-color: #f5a524; --error-button-border-color: #d9b6d0; --error-button-background-color: #c79bbd; --error-button-color: #1b1219; --submit-button-border-color: #d9b6d0; --submit-button-background-color: #c79bbd; --submit-button-color: #1b1219; --graph-opacity: 0.9; --graph-filter: none; } } html, body, button, input, select { font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif; -webkit-font-smoothing: antialiased; } a { color: inherit; } a:focus-visible, button:focus-visible { outline: 3px solid rgb(113 75 103 / 0.35); outline-offset: 2px; border-radius: 8px; } main > section:not(.live-status) > .loading { display: none; } main.container > header:not(:has(+ article)) { margin-bottom: calc(4rem + 58px); } .live-status:has(> .loading) { min-height: 100vh; } .live-status > .loading { margin: 0; padding-top: 2.5rem; } .logo img { width: 3rem; } .live-status img.icon { width: 1rem; }</style><link rel="preconnect" href="https://api.github.com" crossorigin><link rel="preconnect" href="https://raw.githubusercontent.com">'
   introTitle: "Sudoo.sh status"
   introMessage: "Live status of Sudoo.sh services."
   navbar:
@@ -102,6 +108,8 @@ status-website:
     - title: Support
       href: mailto:support@sudoo.sh
   metaTags:
+    - name: description
+      content: "Live status, uptime and response times of the Sudoo.sh website, documentation, marketplace, sign-in, account and API."
     - name: color-scheme
       content: "light dark"
     - name: theme-color
