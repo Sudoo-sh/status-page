@@ -2,7 +2,7 @@
   {
     "name": "Hub API",
     "url": "https://hub.sudoo.sh/healthz",
-    "icon": "https://sudoo.sh/favicon.svg",
+    "icon": "https://status.sudoo.sh/favicon.svg",
     "slug": "hub-api",
     "status": "up",
     "uptime": "100.00%",
@@ -20,7 +20,7 @@
   {
     "name": "Sign-in",
     "url": "https://auth.sudoo.sh/health",
-    "icon": "https://sudoo.sh/favicon.svg",
+    "icon": "https://status.sudoo.sh/favicon.svg",
     "slug": "sign-in",
     "status": "up",
     "uptime": "100.00%",
@@ -38,7 +38,7 @@
   {
     "name": "Account",
     "url": "https://app.sudoo.sh/",
-    "icon": "https://sudoo.sh/favicon.svg",
+    "icon": "https://status.sudoo.sh/favicon.svg",
     "slug": "account",
     "status": "up",
     "uptime": "100.00%",
@@ -56,7 +56,7 @@
   {
     "name": "Admin",
     "url": "https://admin.sudoo.sh/health",
-    "icon": "https://sudoo.sh/favicon.svg",
+    "icon": "https://status.sudoo.sh/favicon.svg",
     "slug": "admin",
     "status": "up",
     "uptime": "100.00%",
@@ -74,7 +74,7 @@
   {
     "name": "Developers",
     "url": "https://developers.sudoo.sh/",
-    "icon": "https://sudoo.sh/favicon.svg",
+    "icon": "https://status.sudoo.sh/favicon.svg",
     "slug": "developers",
     "status": "up",
     "uptime": "100.00%",
@@ -92,7 +92,7 @@
   {
     "name": "Marketplace",
     "url": "https://marketplace.sudoo.sh/",
-    "icon": "https://sudoo.sh/favicon.svg",
+    "icon": "https://status.sudoo.sh/favicon.svg",
     "slug": "marketplace",
     "status": "up",
     "uptime": "100.00%",
@@ -110,7 +110,7 @@
   {
     "name": "Files",
     "url": "https://files.sudoo.sh/healthz",
-    "icon": "https://sudoo.sh/favicon.svg",
+    "icon": "https://status.sudoo.sh/favicon.svg",
     "slug": "files",
     "status": "up",
     "uptime": "100.00%",
@@ -128,7 +128,7 @@
   {
     "name": "Website",
     "url": "https://sudoo.sh/",
-    "icon": "https://sudoo.sh/favicon.svg",
+    "icon": "https://status.sudoo.sh/favicon.svg",
     "slug": "website",
     "status": "up",
     "uptime": "100.00%",
@@ -146,7 +146,7 @@
   {
     "name": "Docs",
     "url": "https://docs.sudoo.sh/",
-    "icon": "https://sudoo.sh/favicon.svg",
+    "icon": "https://status.sudoo.sh/favicon.svg",
     "slug": "docs",
     "status": "up",
     "uptime": "100.00%",
@@ -164,7 +164,7 @@
   {
     "name": "Installer",
     "url": "https://get.sudoo.sh/",
-    "icon": "https://sudoo.sh/favicon.svg",
+    "icon": "https://status.sudoo.sh/favicon.svg",
     "slug": "installer",
     "status": "up",
     "uptime": "100.00%",
