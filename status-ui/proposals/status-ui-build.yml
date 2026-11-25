@@ -1,0 +1,43 @@
+# REVIEW ONLY. This file is outside .github/workflows/, so nothing runs it.
+# Moving it there (and deciding how gh-pages is written) is a separate, explicit decision.
+# It does not touch Upptime's generated workflows or any monitor setting.
+name: Status page data (proposal)
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Summary CI", "Uptime CI"]
+    types: [completed]
+    branches: [master]
+permissions:
+  contents: write
+concurrency:
+  group: status-ui-build
+  cancel-in-progress: true
+jobs:
+  build:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: master
+          fetch-depth: 0   # the response-time samples come from commit history
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - name: Build data and page
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node status-ui/build.mjs --out /tmp/status-ui --data live
+      - name: Publish data files to gh-pages (the only live write; needs explicit approval before use)
+        run: |
+          git fetch origin gh-pages
+          git worktree add /tmp/gh-pages origin/gh-pages
+          mkdir -p /tmp/gh-pages/data
+          cp /tmp/status-ui/data/status.json /tmp/gh-pages/data/status.json
+          cp /tmp/status-ui/incidents.atom /tmp/gh-pages/incidents.atom
+          cd /tmp/gh-pages
+          git config user.name "status-ui build"
+          git config user.email "noreply@users.noreply.github.com"
+          git add data incidents.atom
+          git diff --cached --quiet || (git commit -m "Update status data [skip ci]" && git push origin HEAD:gh-pages)

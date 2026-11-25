@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#714b67">
+<meta name="description" content="Live status, uptime and response times of the Sudoo.sh website, documentation, marketplace, sign-in, account and API.">
+<title>Sudoo.sh status</title>
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/atom+xml" title="Sudoo.sh incidents" href="./incidents.atom">
+<link rel="stylesheet" href="./app.css">
+<script src="./boot.js"></script>
+<script type="module" src="./app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Skip to the status</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="./" aria-label="Sudoo.sh status"><img src="./favicon.svg" alt="" width="28" height="28"><span class="brand-name">Sudoo.sh</span><span class="brand-tag" data-i18n="title">Sudoo.sh status</span></a>
+    <nav class="links" aria-label="Sudoo.sh"><a href="https://sudoo.sh" data-i18n="nav.website">Website</a><a href="https://docs.sudoo.sh" data-i18n="nav.docs">Docs</a><a href="mailto:support@sudoo.sh" data-i18n="nav.support">Support</a></nav>
+    <div class="controls">
+      <div class="seg" role="radiogroup" aria-label="Theme" data-theme-group>
+        <button type="button" role="radio" data-theme-set="auto" data-i18n="theme.auto">Auto</button>
+        <button type="button" role="radio" data-theme-set="light" data-i18n="theme.light">Light</button>
+        <button type="button" role="radio" data-theme-set="dark" data-i18n="theme.dark">Dark</button>
+      </div>
+      <button type="button" class="pill" data-lang-switch lang="ar">العربية</button>
+    </div>
+  </div>
+</header>
+<div class="sample" data-sample hidden role="note"></div>
+<main id="main" class="wrap" tabindex="-1">
+  <section class="hero" data-hero data-state="loading" aria-live="polite">
+    <div class="hero-icon" data-hero-icon aria-hidden="true"></div>
+    <div class="hero-body">
+      <h1 data-hero-title>Loading the status…</h1>
+      <p class="hero-sub" data-hero-sub></p>
+      <p class="hero-meta"><span data-hero-meta></span> <button type="button" class="info" data-about-toggle aria-expanded="false" aria-controls="about"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v5.5M12 7.6v.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="sr" data-i18n="aboutBtn">About this page</span></button></p>
+    </div>
+  </section>
+  <section class="about" id="about" data-about hidden aria-labelledby="about-h">
+    <div class="about-head"><h2 id="about-h" data-i18n="aboutTitle">About this page</h2><button type="button" class="link" data-about-close data-i18n="aboutClose">Close</button></div>
+    <ul data-about-list></ul>
+  </section>
+
+  <section class="band" aria-labelledby="maint-h">
+    <h2 id="maint-h" data-i18n="maintenance">Planned maintenance</h2>
+    <div data-maintenance class="empty"></div>
+  </section>
+
+  <section aria-labelledby="svc-h">
+    <div class="svc-head">
+      <h2 id="svc-h" data-i18n="services">Services</h2>
+      <div class="range" role="radiogroup" aria-labelledby="range-l">
+        <span id="range-l" class="range-l" data-i18n="uptimeRange">Uptime over</span>
+        <button type="button" role="radio" data-range="24h"></button>
+        <button type="button" role="radio" data-range="7d"></button>
+        <button type="button" role="radio" data-range="30d"></button>
+        <button type="button" role="radio" data-range="90d"></button>
+        <button type="button" role="radio" data-range="all"></button>
+      </div>
+    </div>
+    <p class="range-note" data-i18n="rangeNote">Bars show the last 90 days. Uptime follows the range selected.</p>
+    <div data-groups></div>
+  </section>
+
+  <section class="band" aria-labelledby="inc-h">
+    <h2 id="inc-h" data-i18n="incidents">Incidents</h2>
+    <div data-incidents></div>
+  </section>
+
+  <p class="sub"><a class="feed" href="./incidents.atom" data-i18n="feed">Incident feed (Atom)</a></p>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <span>© Sudoo.sh</span>
+    <span><button type="button" class="link" data-about-toggle data-i18n="aboutBtn">About this page</button> · <span data-i18n="poweredBy">Powered by Upptime</span> · <a href="https://github.com/Sudoo-sh/status-page" data-i18n="source">Source on GitHub</a></span>
+  </div>
+</footer>
+<div class="tip" data-tip role="status" hidden></div>
+</body>
+</html>
