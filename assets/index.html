@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self' https://raw.githubusercontent.com https://api.github.com; base-uri 'none'; form-action 'none'"
+    />
+    <title>Sudoo.sh status</title>
+    <meta
+      name="description"
+      content="Live status, uptime and response times of the Sudoo.sh website, documentation, marketplace, sign-in, account and API."
+    />
+    <link rel="canonical" href="https://status.sudoo.sh/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fafafa" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141415" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <script src="/sudoo-boot.js"></script>
+    <link rel="stylesheet" href="/sudoo-status.css" />
+    <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin />
+    <script src="/sudoo-status.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#main"><span lang="en">Skip to the status</span><span lang="ar">انتقل إلى الحالة</span></a>
+    <header class="top">
+      <a class="brand" href="https://sudoo.sh">
+        <img src="/favicon.svg" width="28" height="28" alt="" />
+        <span>Sudoo<span class="faint">.sh</span></span>
+      </a>
+      <nav aria-label="Sudoo.sh">
+        <a href="https://sudoo.sh"><span lang="en">Website</span><span lang="ar">الموقع</span></a>
+        <a href="https://docs.sudoo.sh"><span lang="en">Docs</span><span lang="ar">التوثيق</span></a>
+        <a href="mailto:support@sudoo.sh"><span lang="en">Support</span><span lang="ar">الدعم</span></a>
+        <button type="button" class="switch-language" data-switch-language>
+          <span lang="en">العربية</span><span lang="ar">English</span>
+        </button>
+      </nav>
+    </header>
+    <main id="main">
+      <h1><span lang="en">Sudoo.sh status</span><span lang="ar">حالة Sudoo.sh</span></h1>
+      <p class="lead">
+        <span lang="en">Every public Sudoo.sh service is checked every few minutes from outside, as a visitor would reach it.</span>
+        <span lang="ar">نتحقق من كل خدمة عامة في Sudoo.sh كل بضع دقائق من الخارج، كما يصل إليها الزائر.</span>
+      </p>
+      <section class="overall" data-overall="checking" aria-live="polite">
+        <span class="dot" aria-hidden="true"></span>
+        <p>
+          <span data-overall-text="checking"><span lang="en">Checking the services…</span><span lang="ar">جارٍ التحقق من الخدمات…</span></span>
+          <span data-overall-text="up"><span lang="en">All systems operational</span><span lang="ar">جميع الأنظمة تعمل</span></span>
+          <span data-overall-text="degraded"><span lang="en">Some services are slow</span><span lang="ar">بعض الخدمات بطيئة</span></span>
+          <span data-overall-text="down"><span lang="en">Some services are down</span><span lang="ar">بعض الخدمات متوقفة</span></span>
+          <span data-overall-text="unknown"><span lang="en">The status could not be loaded. Reload the page to try again.</span><span lang="ar">تعذّر تحميل الحالة. أعد تحميل الصفحة للمحاولة مجددًا.</span></span>
+        </p>
+      </section>
+      <section aria-labelledby="services-heading">
+        <div class="list-head">
+          <h2 id="services-heading"><span lang="en">Services</span><span lang="ar">الخدمات</span></h2>
+          <span class="column"><span lang="en">Uptime, 30 days</span><span lang="ar">التوفر، 30 يومًا</span></span>
+          <span class="column"><span lang="en">Response, 7 days</span><span lang="ar">الاستجابة، 7 أيام</span></span>
+        </div>
+        <ul class="services">
+          <li class="service" data-slug="hub-api">
+            <span class="dot" aria-hidden="true"></span>
+            <span class="name"><span lang="en">Hub API</span><span lang="ar">واجهة Hub البرمجية</span></span>
+            <span class="state" data-field="state"><span lang="en">Checking</span><span lang="ar">جارٍ التحقق</span></span>
+            <span class="figure" data-field="uptime" title="">—</span>
+            <span class="figure" data-field="time">—</span>
+            <a class="history" href="/history/hub-api"><span lang="en">History</span><span lang="ar">السجل</span></a>
+          </li>
+          <li class="service" data-slug="sign-in">
+            <span class="dot" aria-hidden="true"></span>
+            <span class="name"><span lang="en">Sign-in</span><span lang="ar">تسجيل الدخول</span></span>
+            <span class="state" data-field="state"><span lang="en">Checking</span><span lang="ar">جارٍ التحقق</span></span>
+            <span class="figure" data-field="uptime" title="">—</span>
+            <span class="figure" data-field="time">—</span>
+            <a class="history" href="/history/sign-in"><span lang="en">History</span><span lang="ar">السجل</span></a>
+          </li>
+          <li class="service" data-slug="account">
+            <span class="dot" aria-hidden="true"></span>
+            <span class="name"><span lang="en">Account</span><span lang="ar">الحساب</span></span>
+            <span class="state" data-field="state"><span lang="en">Checking</span><span lang="ar">جارٍ التحقق</span></span>
+            <span class="figure" data-field="uptime" title="">—</span>
+            <span class="figure" data-field="time">—</span>
+            <a class="history" href="/history/account"><span lang="en">History</span><span lang="ar">السجل</span></a>
+          </li>
+          <li class="service" data-slug="admin">
+            <span class="dot" aria-hidden="true"></span>
+            <span class="name"><span lang="en">Admin</span><span lang="ar">الإدارة</span></span>
+            <span class="state" data-field="state"><span lang="en">Checking</span><span lang="ar">جارٍ التحقق</span></span>
+            <span class="figure" data-field="uptime" title="">—</span>
+            <span class="figure" data-field="time">—</span>
+            <a class="history" href="/history/admin"><span lang="en">History</span><span lang="ar">السجل</span></a>
+          </li>
+          <li class="service" data-slug="developers">
+            <span class="dot" aria-hidden="true"></span>
+            <span class="name"><span lang="en">Developers</span><span lang="ar">بوابة المطوّرين</span></span>
+            <span class="state" data-field="state"><span lang="en">Checking</span><span lang="ar">جارٍ التحقق</span></span>
+            <span class="figure" data-field="uptime" title="">—</span>
+            <span class="figure" data-field="time">—</span>
+            <a class="history" href="/history/developers"><span lang="en">History</span><span lang="ar">السجل</span></a>
+          </li>
+          <li class="service" data-slug="marketplace">
+            <span class="dot" aria-hidden="true"></span>
+            <span class="name"><span lang="en">Marketplace</span><span lang="ar">متجر الإضافات</span></span>
+            <span class="state" data-field="state"><span lang="en">Checking</span><span lang="ar">جارٍ التحقق</span></span>
+            <span class="figure" data-field="uptime" title="">—</span>
+            <span class="figure" data-field="time">—</span>
+            <a class="history" href="/history/marketplace"><span lang="en">History</span><span lang="ar">السجل</span></a>
+          </li>
+          <li class="service" data-slug="files">
+            <span class="dot" aria-hidden="true"></span>
+            <span class="name"><span lang="en">Files</span><span lang="ar">الملفات</span></span>
+            <span class="state" data-field="state"><span lang="en">Checking</span><span lang="ar">جارٍ التحقق</span></span>
+            <span class="figure" data-field="uptime" title="">—</span>
+            <span class="figure" data-field="time">—</span>
+            <a class="history" href="/history/files"><span lang="en">History</span><span lang="ar">السجل</span></a>
+          </li>
+          <li class="service" data-slug="website">
+            <span class="dot" aria-hidden="true"></span>
+            <span class="name"><span lang="en">Website</span><span lang="ar">الموقع</span></span>
+            <span class="state" data-field="state"><span lang="en">Checking</span><span lang="ar">جارٍ التحقق</span></span>
+            <span class="figure" data-field="uptime" title="">—</span>
+            <span class="figure" data-field="time">—</span>
+            <a class="history" href="/history/website"><span lang="en">History</span><span lang="ar">السجل</span></a>
+          </li>
+          <li class="service" data-slug="docs">
+            <span class="dot" aria-hidden="true"></span>
+            <span class="name"><span lang="en">Docs</span><span lang="ar">التوثيق</span></span>
+            <span class="state" data-field="state"><span lang="en">Checking</span><span lang="ar">جارٍ التحقق</span></span>
+            <span class="figure" data-field="uptime" title="">—</span>
+            <span class="figure" data-field="time">—</span>
+            <a class="history" href="/history/docs"><span lang="en">History</span><span lang="ar">السجل</span></a>
+          </li>
+          <li class="service" data-slug="installer">
+            <span class="dot" aria-hidden="true"></span>
+            <span class="name"><span lang="en">Installer</span><span lang="ar">المثبّت</span></span>
+            <span class="state" data-field="state"><span lang="en">Checking</span><span lang="ar">جارٍ التحقق</span></span>
+            <span class="figure" data-field="uptime" title="">—</span>
+            <span class="figure" data-field="time">—</span>
+            <a class="history" href="/history/installer"><span lang="en">History</span><span lang="ar">السجل</span></a>
+          </li>
+        </ul>
+        <p class="updated" data-updated>
+          <span lang="en">Figures from the last check run, refreshed every minute.</span>
+          <span lang="ar">الأرقام من آخر جولة تحقق، وتتحدث كل دقيقة.</span>
+        </p>
+      </section>
+      <section class="incidents" aria-labelledby="incidents-heading" hidden>
+        <h2 id="incidents-heading"><span lang="en">Open incidents</span><span lang="ar">حوادث مفتوحة</span></h2>
+        <ul data-incidents></ul>
+      </section>
+    </main>
+    <footer>
+      <p>
+        <span lang="en">© Sudoo.sh. Checks and history by</span><span lang="ar">© Sudoo.sh. الفحوص والسجل بواسطة</span>
+        <a href="https://upptime.js.org">Upptime</a>,
+        <a href="https://github.com/Sudoo-sh/status-page"><span lang="en">open on GitHub</span><span lang="ar">مفتوحة على GitHub</span></a>.
+      </p>
+    </footer>
+  </body>
+</html>
