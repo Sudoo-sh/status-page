@@ -1,0 +1,188 @@
+{
+ "coverageDays": 10,
+ "generatedAgoMin": 5,
+ "services": [
+  {
+   "slug": "website",
+   "name": "Website",
+   "status": "up",
+   "code": 200,
+   "ms": 0,
+   "updatedAgoMin": null,
+   "uptime": {
+    "day": "",
+    "week": "",
+    "month": "",
+    "all": "",
+    "ninetyDay": null
+   },
+   "avgMs": {},
+   "downDaysAgo": {},
+   "samplesAgoMin": []
+  },
+  {
+   "slug": "docs",
+   "name": "Docs",
+   "status": "up",
+   "code": 200,
+   "ms": 0,
+   "updatedAgoMin": null,
+   "uptime": {
+    "day": "",
+    "week": "",
+    "month": "",
+    "all": "",
+    "ninetyDay": null
+   },
+   "avgMs": {},
+   "downDaysAgo": {},
+   "samplesAgoMin": []
+  },
+  {
+   "slug": "hub-api",
+   "name": "Hub API",
+   "status": "up",
+   "code": 200,
+   "ms": 0,
+   "updatedAgoMin": null,
+   "uptime": {
+    "day": "",
+    "week": "",
+    "month": "",
+    "all": "",
+    "ninetyDay": null
+   },
+   "avgMs": {},
+   "downDaysAgo": {},
+   "samplesAgoMin": []
+  },
+  {
+   "slug": "sign-in",
+   "name": "Sign-in",
+   "status": "up",
+   "code": 200,
+   "ms": 0,
+   "updatedAgoMin": null,
+   "uptime": {
+    "day": "",
+    "week": "",
+    "month": "",
+    "all": "",
+    "ninetyDay": null
+   },
+   "avgMs": {},
+   "downDaysAgo": {},
+   "samplesAgoMin": []
+  },
+  {
+   "slug": "account",
+   "name": "Account",
+   "status": "up",
+   "code": 200,
+   "ms": 0,
+   "updatedAgoMin": null,
+   "uptime": {
+    "day": "",
+    "week": "",
+    "month": "",
+    "all": "",
+    "ninetyDay": null
+   },
+   "avgMs": {},
+   "downDaysAgo": {},
+   "samplesAgoMin": []
+  },
+  {
+   "slug": "admin",
+   "name": "Admin",
+   "status": "up",
+   "code": 200,
+   "ms": 0,
+   "updatedAgoMin": null,
+   "uptime": {
+    "day": "",
+    "week": "",
+    "month": "",
+    "all": "",
+    "ninetyDay": null
+   },
+   "avgMs": {},
+   "downDaysAgo": {},
+   "samplesAgoMin": []
+  },
+  {
+   "slug": "marketplace",
+   "name": "Marketplace",
+   "status": "up",
+   "code": 200,
+   "ms": 0,
+   "updatedAgoMin": null,
+   "uptime": {
+    "day": "",
+    "week": "",
+    "month": "",
+    "all": "",
+    "ninetyDay": null
+   },
+   "avgMs": {},
+   "downDaysAgo": {},
+   "samplesAgoMin": []
+  },
+  {
+   "slug": "developers",
+   "name": "Developers",
+   "status": "up",
+   "code": 200,
+   "ms": 0,
+   "updatedAgoMin": null,
+   "uptime": {
+    "day": "",
+    "week": "",
+    "month": "",
+    "all": "",
+    "ninetyDay": null
+   },
+   "avgMs": {},
+   "downDaysAgo": {},
+   "samplesAgoMin": []
+  },
+  {
+   "slug": "installer",
+   "name": "Installer",
+   "status": "up",
+   "code": 200,
+   "ms": 0,
+   "updatedAgoMin": null,
+   "uptime": {
+    "day": "",
+    "week": "",
+    "month": "",
+    "all": "",
+    "ninetyDay": null
+   },
+   "avgMs": {},
+   "downDaysAgo": {},
+   "samplesAgoMin": []
+  },
+  {
+   "slug": "files",
+   "name": "Files",
+   "status": "up",
+   "code": 200,
+   "ms": 0,
+   "updatedAgoMin": null,
+   "uptime": {
+    "day": "",
+    "week": "",
+    "month": "",
+    "all": "",
+    "ninetyDay": null
+   },
+   "avgMs": {},
+   "downDaysAgo": {},
+   "samplesAgoMin": []
+  }
+ ],
+ "incidents": [],
+ "maintenance": []
+}

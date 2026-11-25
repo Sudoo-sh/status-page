@@ -1,0 +1,475 @@
+{
+ "coverageDays": 30,
+ "generatedAgoMin": 3,
+ "services": [
+  {
+   "slug": "website",
+   "name": "Website",
+   "status": "up",
+   "code": 200,
+   "ms": 150,
+   "updatedAgoMin": 4,
+   "uptime": {
+    "day": "100%",
+    "week": "100%",
+    "month": "99.99%",
+    "all": "99.98%",
+    "ninetyDay": null
+   },
+   "avgMs": {
+    "day": 150,
+    "week": 180,
+    "month": 170,
+    "year": 160
+   },
+   "downDaysAgo": {},
+   "samplesAgoMin": [
+    [
+     905,
+     264
+    ],
+    [
+     725,
+     124
+    ],
+    [
+     545,
+     80
+    ],
+    [
+     365,
+     169
+    ],
+    [
+     185,
+     181
+    ],
+    [
+     5,
+     90
+    ]
+   ]
+  },
+  {
+   "slug": "docs",
+   "name": "Docs",
+   "status": "up",
+   "code": 200,
+   "ms": 210,
+   "updatedAgoMin": 4,
+   "uptime": {
+    "day": "100%",
+    "week": "100%",
+    "month": "100%",
+    "all": "100%",
+    "ninetyDay": null
+   },
+   "avgMs": {
+    "day": 210,
+    "week": 240,
+    "month": 230,
+    "year": 220
+   },
+   "downDaysAgo": {},
+   "samplesAgoMin": [
+    [
+     905,
+     245
+    ],
+    [
+     725,
+     106
+    ],
+    [
+     545,
+     238
+    ],
+    [
+     365,
+     250
+    ],
+    [
+     185,
+     211
+    ],
+    [
+     5,
+     244
+    ]
+   ]
+  },
+  {
+   "slug": "hub-api",
+   "name": "Hub API",
+   "status": "up",
+   "code": 200,
+   "ms": 600,
+   "updatedAgoMin": 4,
+   "uptime": {
+    "day": "100%",
+    "week": "99.9%",
+    "month": "99.7%",
+    "all": "99.7%",
+    "ninetyDay": null
+   },
+   "avgMs": {
+    "day": 600,
+    "week": 630,
+    "month": 620,
+    "year": 610
+   },
+   "downDaysAgo": {
+    "9": 240,
+    "3": 20
+   },
+   "samplesAgoMin": [
+    [
+     905,
+     621
+    ],
+    [
+     725,
+     546
+    ],
+    [
+     545,
+     600
+    ],
+    [
+     365,
+     694
+    ],
+    [
+     185,
+     712
+    ],
+    [
+     5,
+     483
+    ]
+   ]
+  },
+  {
+   "slug": "sign-in",
+   "name": "Sign-in",
+   "status": "up",
+   "code": 200,
+   "ms": 2600,
+   "updatedAgoMin": 6,
+   "uptime": {
+    "day": "100%",
+    "week": "100%",
+    "month": "100%",
+    "all": "100%",
+    "ninetyDay": null
+   },
+   "avgMs": {
+    "day": 2600,
+    "week": 2630,
+    "month": 2620,
+    "year": 2610
+   },
+   "downDaysAgo": {},
+   "samplesAgoMin": [
+    [
+     905,
+     2694
+    ],
+    [
+     725,
+     2618
+    ],
+    [
+     545,
+     2600
+    ],
+    [
+     365,
+     2663
+    ],
+    [
+     185,
+     2529
+    ],
+    [
+     5,
+     2539
+    ]
+   ]
+  },
+  {
+   "slug": "account",
+   "name": "Account",
+   "status": "up",
+   "code": 302,
+   "ms": 620,
+   "updatedAgoMin": 4,
+   "uptime": {
+    "day": "100%",
+    "week": "100%",
+    "month": "99.97%",
+    "all": "99.95%",
+    "ninetyDay": null
+   },
+   "avgMs": {
+    "day": 620,
+    "week": 650,
+    "month": 640,
+    "year": 630
+   },
+   "downDaysAgo": {},
+   "samplesAgoMin": [
+    [
+     905,
+     538
+    ],
+    [
+     725,
+     720
+    ],
+    [
+     545,
+     663
+    ],
+    [
+     365,
+     601
+    ],
+    [
+     185,
+     621
+    ],
+    [
+     5,
+     640
+    ]
+   ],
+   "expected": [
+    "200",
+    "301",
+    "302"
+   ]
+  },
+  {
+   "slug": "admin",
+   "name": "Admin",
+   "status": "down",
+   "code": 302,
+   "ms": 580,
+   "updatedAgoMin": 4,
+   "uptime": {
+    "day": "97.2%",
+    "week": "99.1%",
+    "month": "99.5%",
+    "all": "99.5%",
+    "ninetyDay": null
+   },
+   "avgMs": {
+    "day": 580,
+    "week": 610,
+    "month": 600,
+    "year": 590
+   },
+   "downDaysAgo": {
+    "0": 40,
+    "1": 60
+   },
+   "samplesAgoMin": [
+    [
+     905,
+     593
+    ],
+    [
+     725,
+     697
+    ],
+    [
+     545,
+     682
+    ],
+    [
+     365,
+     498
+    ],
+    [
+     185,
+     622
+    ],
+    [
+     5,
+     519
+    ]
+   ],
+   "expected": [
+    "200"
+   ]
+  },
+  {
+   "slug": "marketplace",
+   "name": "Marketplace",
+   "status": "up",
+   "code": 200,
+   "ms": 780,
+   "updatedAgoMin": 400,
+   "uptime": {
+    "day": "100%",
+    "week": "100%",
+    "month": "100%",
+    "all": "100%",
+    "ninetyDay": null
+   },
+   "avgMs": {
+    "day": 780,
+    "week": 810,
+    "month": 800,
+    "year": 790
+   },
+   "downDaysAgo": {},
+   "samplesAgoMin": [
+    [
+     905,
+     676
+    ],
+    [
+     725,
+     858
+    ],
+    [
+     545,
+     831
+    ],
+    [
+     365,
+     663
+    ],
+    [
+     185,
+     849
+    ],
+    [
+     5,
+     759
+    ]
+   ]
+  },
+  {
+   "slug": "developers",
+   "name": "Developers",
+   "status": "up",
+   "code": 200,
+   "ms": 740,
+   "updatedAgoMin": null,
+   "uptime": {
+    "day": "100%",
+    "week": "100%",
+    "month": "99.97%",
+    "all": "99.95%",
+    "ninetyDay": null
+   },
+   "avgMs": {
+    "day": 740,
+    "week": 770,
+    "month": 760,
+    "year": 750
+   },
+   "downDaysAgo": {},
+   "samplesAgoMin": []
+  },
+  {
+   "slug": "installer",
+   "name": "Installer",
+   "status": "up",
+   "code": 302,
+   "ms": 550,
+   "updatedAgoMin": 4,
+   "uptime": {
+    "day": "100%",
+    "week": "100%",
+    "month": "99.97%",
+    "all": "99.95%",
+    "ninetyDay": null
+   },
+   "avgMs": {
+    "day": 550,
+    "week": 580,
+    "month": 570,
+    "year": 560
+   },
+   "downDaysAgo": {},
+   "samplesAgoMin": [
+    [
+     30,
+     540
+    ]
+   ],
+   "expected": [
+    "302"
+   ]
+  },
+  {
+   "slug": "files",
+   "name": "Files",
+   "status": "up",
+   "code": 200,
+   "ms": 570,
+   "updatedAgoMin": 4,
+   "uptime": {
+    "day": "100%",
+    "week": "100%",
+    "month": "99.97%",
+    "all": "99.95%",
+    "ninetyDay": null
+   },
+   "avgMs": {
+    "day": 570,
+    "week": 600,
+    "month": 590,
+    "year": 580
+   },
+   "downDaysAgo": {},
+   "samplesAgoMin": [
+    [
+     905,
+     649
+    ],
+    [
+     725,
+     527
+    ],
+    [
+     545,
+     460
+    ],
+    [
+     365,
+     601
+    ],
+    [
+     185,
+     644
+    ],
+    [
+     5,
+     490
+    ]
+   ]
+  }
+ ],
+ "incidents": [
+  {
+   "id": 14,
+   "title": "Example: Admin check failing",
+   "startAgoMin": 120,
+   "endAgoMin": null,
+   "service": "admin"
+  },
+  {
+   "id": 9,
+   "title": "Example: Hub API unreachable",
+   "startAgoMin": 12960,
+   "endAgoMin": 12720,
+   "service": "hub-api"
+  }
+ ],
+ "maintenance": []
+}
