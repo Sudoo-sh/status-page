@@ -37,7 +37,8 @@ sites:
   - name: Admin
     slug: admin
     url: https://admin.sudoo.sh/health
-    expectedStatusCodes: [200]
+    # the admin console sits behind the staff sign-in gate: a redirect to the gate means it is reachable
+    expectedStatusCodes: [302]
     maxRedirects: 0
     icon: https://status.sudoo.sh/favicon.svg
 
