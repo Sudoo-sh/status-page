@@ -1,4 +1,6 @@
 // English and Arabic strings. Service names and groups are keyed by monitor slug.
+// Both languages must have the same keys: app.js reads them without a fallback. Some values are functions that take
+// counts or times and return the sentence, so word order can follow each language.
 export const STR = {
   en: {
     title: "Sudoo.sh status",

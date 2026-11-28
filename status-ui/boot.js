@@ -1,5 +1,7 @@
 // Runs before first paint: language, direction and theme, so an Arabic page never flashes left to right
 // and a dark choice never flashes light. External file because the Content-Security-Policy has no inline script.
+// Order: the saved choice (localStorage), then the sudoo_lang / sudoo_theme cookie shared with sudoo.sh, then the
+// browser's languages; English and the system theme otherwise. Plain ES5 so it runs on any browser before app.js.
 (function () {
   var root = document.documentElement;
   var lang = null;
