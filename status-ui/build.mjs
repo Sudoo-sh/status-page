@@ -6,6 +6,8 @@
 //   node status-ui/build.mjs --out /tmp/preview --data live      (needs full git history: fetch-depth 0)
 //
 // Environment: GITHUB_TOKEN (optional, raises the issues API limit), STATUS_REPO (default Sudoo-sh/status-page).
+// Exit codes: 0 when the page is built; 1 (an uncaught error) when a file cannot be read. An issues API failure is
+// only a warning: the page then says the lists were not available.
 import { execFileSync } from "node:child_process";
 import { cpSync, mkdirSync, readFileSync, writeFileSync, readdirSync, rmSync, existsSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
@@ -19,6 +21,12 @@ const mode = args.data || "fixture";
 const REPO = process.env.STATUS_REPO || "Sudoo-sh/status-page";
 const SLUGS = ["website", "docs", "hub-api", "sign-in", "account", "admin", "marketplace", "developers", "installer", "files"];
 
+/**
+ * Read the flat "key: value" lines of an Upptime history file. Not a YAML parser: nested values are ignored, which is
+ * enough for history/<slug>.yml.
+ * @param {string} text The file's text.
+ * @returns {Object<string, string>} The values by key, as text.
+ */
 function yml(text) {
   const o = {};
   for (const line of text.split("\n")) {
@@ -27,9 +35,19 @@ function yml(text) {
   }
   return o;
 }
+/**
+ * Run git in the repository checkout.
+ * @param {...string} a The arguments.
+ * @returns {string} What git printed.
+ * @throws When git fails (for example a file that is not in a commit).
+ */
 function git(...a) {
   return execFileSync("git", a, { cwd: repoRoot, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
 }
+/**
+ * Read the expected status codes of each monitor from .upptimerc.yml (line by line, no YAML library).
+ * @returns {Object<string, string[]>} The codes by slug; a slug without the setting is missing.
+ */
 function expectedFromConfig() {
   // expectedStatusCodes per slug, read from .upptimerc.yml (monitor settings are only read, never changed)
   const text = readFileSync(join(repoRoot, ".upptimerc.yml"), "utf8");
@@ -43,6 +61,11 @@ function expectedFromConfig() {
   }
   return res;
 }
+/**
+ * Read a service's response-time samples from the git history of history/<slug>.yml (at most the last 600 commits).
+ * @param {string} slug The monitor's slug.
+ * @returns {{t: string, ms: number}[]} The samples, oldest first; empty when the history cannot be read.
+ */
 function samplesFor(slug) {
   // Recorded samples: one per commit that changed history/<slug>.yml, using the file's own recorded time and value.
   // Commit cadence is not check cadence. Nothing here is resampled or filled.
@@ -61,6 +84,13 @@ function samplesFor(slug) {
   }
   return list.reverse();
 }
+/**
+ * Read this repository's issues with a label from the public GitHub API (one page of 100; pull requests dropped).
+ * GITHUB_TOKEN, when set, is sent to raise the rate limit.
+ * @param {string} label The label, "status" or "maintenance".
+ * @returns {Promise<Object[]>} The issues as the API gives them.
+ * @throws When the API answers with an error status or cannot be reached.
+ */
 async function issues(label) {
   const headers = { Accept: "application/vnd.github+json", "User-Agent": "sudoo-status-ui-build" };
   if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
@@ -68,6 +98,11 @@ async function issues(label) {
   if (!res.ok) throw new Error(`issues ${label}: HTTP ${res.status}`);
   return (await res.json()).filter((i) => !i.pull_request);
 }
+/**
+ * Read the `start:` and `end:` lines from the HTML comment in a maintenance issue's body, as Upptime documents them.
+ * @param {string|null} body The issue's body.
+ * @returns {Object<string, string>} The values by key; empty when the body has no comment.
+ */
 function parseMaintenanceBody(body) {
   const m = /<!--([\s\S]*?)-->/.exec(body || "");
   if (!m) return {};
@@ -78,10 +113,22 @@ function parseMaintenanceBody(body) {
   }
   return o;
 }
+/**
+ * Find the service an issue is about from its labels.
+ * @param {(string|{name: string})[]} labels The issue's labels.
+ * @returns {string|null} The first label that is a known slug, or null.
+ */
 function slugOf(labels) {
   const names = labels.map((l) => (typeof l === "string" ? l : l.name));
   return names.find((n) => SLUGS.includes(n)) || null;
 }
+/**
+ * Build the page's data from this checkout: history/summary.json, history/<slug>.yml, .upptimerc.yml and the git
+ * history, plus incidents and maintenance from the issues API. When the issues cannot be read the lists are null, so
+ * the page says they were not available instead of "none".
+ * @returns {Promise<Object>} The data written to data/status.json.
+ * @throws When history/summary.json or a history file cannot be read.
+ */
 async function liveData() {
   const summary = JSON.parse(readFileSync(join(repoRoot, "history/summary.json"), "utf8"));
   const expected = expectedFromConfig();
@@ -124,6 +171,13 @@ async function liveData() {
     services, incidents, maintenance,
   };
 }
+/**
+ * Build the page's data from a fixture in status-ui/fixtures. Ages are turned into times from now; `sample` is true,
+ * so the page shows the "Sample data" banner.
+ * @param {string} name The fixture's name: sample, calm or unknown.
+ * @returns {Object} The data written to data/status.json.
+ * @throws When the fixture cannot be read or is not valid JSON.
+ */
 function fixtureData(name) {
   // Fixtures give ages in minutes so the preview looks the same whenever it is built. Illustrative only.
   const f = JSON.parse(readFileSync(join(here, "fixtures", `${name}.json`), "utf8"));
@@ -146,6 +200,11 @@ function fixtureData(name) {
     maintenance: f.maintenance ? f.maintenance.map((m) => ({ id: m.id, title: m.title, url: null, start: iso(m.startAgoMin), end: iso(m.endAgoMin), service: null })) : [],
   };
 }
+/**
+ * Write the incidents as an Atom feed, newest first. Every value is escaped for XML.
+ * @param {Object} data The page's data.
+ * @returns {string} The feed's XML.
+ */
 function atom(data) {
   const esc = (s) => String(s).replace(/[<>&"']/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", '"': "&quot;", "'": "&apos;" }[c]));
   const list = (data.incidents || []).slice().sort((a, b) => Date.parse(b.start) - Date.parse(a.start));
@@ -169,6 +228,8 @@ ${entries}
 `;
 }
 
+// Side effects: the output folder is deleted and made again, then filled with the page, data/status.json and
+// incidents.atom. Nothing outside it is written.
 rmSync(out, { recursive: true, force: true });
 mkdirSync(join(out, "data"), { recursive: true });
 for (const f of ["index.html", "app.css", "boot.js", "favicon.svg"]) cpSync(join(here, f), join(out, f));

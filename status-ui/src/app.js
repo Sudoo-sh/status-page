@@ -1,3 +1,7 @@
+// The status page in the browser: reads ./data/status.json (made by build.mjs), draws the headline, the services
+// with their 90-day bars and charts, incidents and maintenance, and handles language, theme, range and the tooltip.
+// It refreshes every REFRESH_MS while the tab is visible. Only the language, theme and range are kept, in
+// localStorage; everything else is read again on each load.
 import { DATA_URL, REFRESH_MS, STALE_AFTER_MIN, SLOW_MS } from "./config.js";
 import { STR } from "./i18n.js";
 import { serviceState, headline, dayBlocks, uptimeValue, samplesIn, formatAge, parseTime } from "./logic.js";
@@ -23,6 +27,14 @@ const num = (v, d = 0) => new Intl.NumberFormat(locale(), { minimumFractionDigit
 const when = (ms) => new Intl.DateTimeFormat(locale(), { dateStyle: "medium", timeStyle: "short" }).format(new Date(ms));
 const day = (ms) => new Intl.DateTimeFormat(locale(), { dateStyle: "medium", timeZone: "UTC" }).format(new Date(ms));
 
+/**
+ * Make an HTML element. Text children are added as text, never as markup.
+ * @param {string} tag The tag name.
+ * @param {Object|null} attrs The attributes; "class" sets the class, names starting with "on" add listeners, null,
+ *   undefined and false are skipped, true gives an empty attribute.
+ * @param {...*} kids The children: nodes, text, or lists of them.
+ * @returns {HTMLElement} The element.
+ */
 function h(tag, attrs, ...kids) {
   const el = document.createElement(tag);
   for (const k in attrs || {}) {
@@ -37,6 +49,13 @@ function h(tag, attrs, ...kids) {
 }
 
 const SVGNS = "http://www.w3.org/2000/svg";
+/**
+ * Make an SVG element.
+ * @param {string} tag The tag name.
+ * @param {Object|null} attrs The attributes.
+ * @param {...*} kids The child nodes.
+ * @returns {SVGElement} The element.
+ */
 function s(tag, attrs, ...kids) {
   const el = document.createElementNS(SVGNS, tag);
   for (const k in attrs || {}) el.setAttribute(k, attrs[k]);
@@ -54,6 +73,12 @@ const ICON = {
   unknown: ["M7 12h10"],
   loading: ["M7 12h.1M12 12h.1M17 12h.1"],
 };
+/**
+ * Draw the icon of a state.
+ * @param {string} state A state from `serviceState`, or "loading".
+ * @param {number} size The width and height in pixels.
+ * @returns {SVGElement} The icon, hidden from screen readers (the text next to it says the state).
+ */
 function icon(state, size = 20) {
   const parts = ICON[state] || ICON.unknown;
   const svg = s("svg", { viewBox: "0 0 24 24", width: size, height: size, "aria-hidden": "true", class: "ico" });
@@ -71,6 +96,10 @@ const GROUPS = [
   ["downloads", ["installer", "files"]],
 ];
 
+/**
+ * Write the words of the current language into the static parts of the page (data-i18n), the About list, the
+ * language, theme and range buttons. The 90 d range stays hidden until the data has a 90-day figure.
+ */
 function applyStatic() {
   const T = t();
   $$("[data-i18n]").forEach((el) => {
@@ -95,11 +124,20 @@ function applyStatic() {
   });
 }
 
+/**
+ * Say since when the data covers the services.
+ * @returns {string} The first day of coverage, or "" when unknown.
+ */
 function sinceText() {
   const start = data && data.coverageStart ? parseTime(data.coverageStart) : null;
   return start === null ? "" : day(start);
 }
 
+/**
+ * Draw the headline, its count line and "Updated N ago".
+ * @param {number} now The current time in milliseconds.
+ * @param {{svc: Object, st: Object}[]} rows Each service with its state.
+ */
 function renderHero(now, rows) {
   const T = t();
   const hero = $("[data-hero]");
@@ -139,6 +177,12 @@ function renderHero(now, rows) {
   meta.textContent = parts.join(" · ");
 }
 
+/**
+ * Say the recorded facts behind a state (code, expected codes, age limit), without claiming a cause.
+ * @param {Object} svc The service's data.
+ * @param {{state: string}} st Its state.
+ * @returns {string} The text, or "" for states that need none.
+ */
 function stateFacts(svc, st) {
   const T = t();
   if (st.state === "attention") return T.attentionFacts(svc.code, (svc.expected || []).join(", ") || "?");
@@ -148,6 +192,12 @@ function stateFacts(svc, st) {
   return "";
 }
 
+/**
+ * Draw a service's 90-day bar. The blocks and a describer are kept on the element for the tooltip.
+ * @param {Object} svc The service's data.
+ * @param {number} now The current time in milliseconds.
+ * @returns {HTMLElement} The bar.
+ */
 function bar(svc, now) {
   const T = t();
   const blocks = dayBlocks(svc, now);
@@ -165,6 +215,13 @@ function bar(svc, now) {
   return wrap;
 }
 
+/**
+ * Draw the response-time chart of an open row, for the 24 h or 7 d window chosen for that service. With fewer than
+ * two samples it says so and shows the latest value.
+ * @param {Object} svc The service's data.
+ * @param {number} now The current time in milliseconds.
+ * @returns {HTMLElement} The chart box.
+ */
 function chart(svc, now) {
   const T = t();
   const win = chartWindow[svc.slug] || "24h";
@@ -206,6 +263,12 @@ function chart(svc, now) {
 }
 
 const RANGE_DAYS = { "24h": 1, "7d": 7, "30d": 30, "90d": 90 };
+/**
+ * Say how many days of data back the uptime figure when that is less than the range.
+ * @param {Object} svc The service's data.
+ * @param {number} now The current time in milliseconds.
+ * @returns {string} The text, or "" when the start of monitoring is not known.
+ */
 function coverageText(svc, now) {
   const T = t();
   const start = parseTime(svc.startTime);
@@ -216,6 +279,12 @@ function coverageText(svc, now) {
   return (have < want ? `${T.coverage(num(have, 1), num(want))}. ` : "") + T.reported;
 }
 
+/**
+ * Draw one service's row: name, state, uptime for the chosen range, the bar and, when open, the details.
+ * @param {Object} svc The service's data.
+ * @param {number} now The current time in milliseconds.
+ * @returns {HTMLElement} The row.
+ */
 function row(svc, now) {
   const T = t();
   const st = serviceState(svc, now);
@@ -242,6 +311,11 @@ function row(svc, now) {
     details);
 }
 
+/**
+ * Draw the services in their groups (GROUPS); services in no group go last.
+ * @param {number} now The current time in milliseconds.
+ * @param {{svc: Object, st: Object}[]} rows Each service with its state.
+ */
 function renderServices(now, rows) {
   const T = t();
   const host = $("[data-groups]");
@@ -260,6 +334,12 @@ function renderServices(now, rows) {
   if (rest.length) host.append(h("section", { class: "group" }, h("div", { class: "rows" }, rest.map((r) => row(r.svc, now)))));
 }
 
+/**
+ * Say a duration in minutes, hours or days.
+ * @param {number} a The start in milliseconds.
+ * @param {number} b The end in milliseconds.
+ * @returns {string} The text.
+ */
 function duration(a, b) {
   const min = Math.max(0, Math.round((b - a) / 60000));
   if (min < 60) return `${num(min)} min`;
@@ -267,6 +347,13 @@ function duration(a, b) {
   return `${num(Math.round(min / 144) / 10, 1)} d`;
 }
 
+/**
+ * Draw a list of incidents or maintenance windows.
+ * @param {Object[]} list The events.
+ * @param {string} kind "incident" or "maintenance".
+ * @param {number} now The current time in milliseconds; an ongoing event's duration runs to now.
+ * @returns {HTMLElement} The list.
+ */
 function eventList(list, kind, now) {
   const T = t();
   return h("ul", { class: "events" }, list.map((e) => {
@@ -278,6 +365,11 @@ function eventList(list, kind, now) {
   }));
 }
 
+/**
+ * Draw the incidents and maintenance sections. A null list means it could not be read at build time, and the page
+ * says so instead of "none".
+ * @param {number} now The current time in milliseconds.
+ */
 function renderEvents(now) {
   const T = t();
   const inc = $("[data-incidents]");
@@ -293,6 +385,9 @@ function renderEvents(now) {
   else mnt.append(eventList(data.maintenance, "maintenance", now));
 }
 
+/**
+ * Draw the whole page from the current data, language, range and open rows.
+ */
 function render() {
   applyStatic();
   const now = Date.now();
@@ -305,6 +400,11 @@ function render() {
   renderEvents(now);
 }
 
+/**
+ * Read ./data/status.json and draw the page. On a failure the data already shown stays; with no data the page says
+ * it could not load. Nothing is ever made up.
+ * @returns {Promise<void>}
+ */
 async function load() {
   try {
     const res = await fetch(DATA_URL, { cache: "no-cache" });
@@ -322,6 +422,11 @@ async function load() {
 
 // tooltip on the 90-day bars: pointer hover/tap and keyboard arrows
 const tip = $("[data-tip]");
+/**
+ * Show the tooltip of one day block above it and mark the block as current.
+ * @param {HTMLElement} bar The bar.
+ * @param {number} i The block's index, 0 to 89.
+ */
 function showTip(bar, i, target) {
   const b = bar._blocks[i];
   if (!b) return;

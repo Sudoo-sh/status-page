@@ -1,3 +1,5 @@
+// Tests of the pure functions in src/logic.js: states, headline, day blocks, uptime and samples.
+// Run: node --test status-ui/test/logic.test.mjs (no dependencies).
 import test from "node:test";
 import assert from "node:assert/strict";
 import { serviceState, headline, dayBlocks, uptimeValue, samplesIn } from "../src/logic.js";

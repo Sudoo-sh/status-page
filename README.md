@@ -31,6 +31,19 @@ With [Upptime](https://upptime.js.org), you can get your own unlimited and free 
 
 [**Visit our status website →**](https://status.sudoo.sh)
 
+## How this code is organised
+
+| Folder or file | What lives there |
+| :--- | :--- |
+| `.upptimerc.yml` | The monitors (sites, expected codes) and the status page settings Upptime reads |
+| `.github/workflows/` | Upptime's generated workflows: checks, response times, graphs, summary, static site |
+| `history/` | What the monitor recorded, one `<slug>.yml` per service, and `summary.json` (written by Upptime) |
+| `api/`, `graphs/` | Badge data and response-time graphs (written by Upptime) |
+| `assets/` | Files copied into the live site. A push that changes `assets/**` on any branch deploys that branch |
+| `status-ui/` | A redesigned status page, for review and preview only; see [status-ui/README.md](status-ui/README.md) |
+
+Files written by Upptime are not edited by hand. See [CONTRIBUTING.md](CONTRIBUTING.md) for the rules.
+
 ## 📄 License
 
 - Powered by: [Upptime](https://github.com/upptime/upptime)
